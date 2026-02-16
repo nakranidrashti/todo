@@ -47,13 +47,13 @@
 
             <!-- Scrollable Task List -->
             <div style="height:350px; overflow-y:auto;">
-
+                {%  for task in tasks %}
                 <div class="card mt-3">
                     <div class="card-body">
-                        This is some task
+                        {{task.task}}
                         <span class="float-end">
                             <a class="btn btn-success btn-sm">
-                                <i class="fa fa-check"></i>
+                                <i class="fa fa-check">Mark as Done</i>
                             </a>
                             <a class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
@@ -63,8 +63,9 @@
                             </a>
                         </span>
                     </div>
+                    
                 </div>
-
+                {% endfor %}
             </div>
         </div>
 
@@ -86,10 +87,11 @@
     <div class="row mt-4">
         <div class="col-md-7">
 
-            <form action="">
+            <form action="{% url 'addTask' %}" method="post">
+                {% csrf_token %}
                 <div class="d-flex gap-2">
-                    <input type="text" class="form-control" placeholder="Add a task">
-                    <button class="btn btn-primary">
+                    <input type="text" class="form-control" placeholder="Add a task" name="task">
+                    <button type="submit" class="btn btn-primary">
                         <i class="fa fa-plus"></i> Add
                     </button>
                 </div>
